@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 
+import '../../features/auth/di/auth_di.dart';
 import '../network/api_client.dart';
 import '../network/dio_client.dart';
 
@@ -14,4 +15,6 @@ void setupLocator() {
   locator.registerLazySingleton<ApiClient>(() {
     return ApiClient(dio: locator());
   });
+
+  registerAuthDependencies();
 }
