@@ -5,6 +5,7 @@ import 'package:get_it/get_it.dart';
 import '../../features/auth/di/auth_di.dart';
 import '../network/api_client.dart';
 import '../network/dio_client.dart';
+import '../network/interceptors/auth_interceptor.dart';
 import '../storage/secure_token_storage.dart';
 import '../storage/token_storage.dart';
 
@@ -17,6 +18,10 @@ void setupLocator() {
 
   locator.registerLazySingleton<TokenStorage>(() {
     return SecureTokenStorage(secureStorage: locator());
+  });
+
+  locator.registerLazySingleton<AuthInterceptor>(() {
+    return AuthInterceptor(tokenStorage: locator());
   });
 
   locator.registerLazySingleton<Dio>(() {
