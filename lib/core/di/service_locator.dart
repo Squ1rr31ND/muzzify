@@ -25,7 +25,7 @@ void setupLocator() {
   });
 
   locator.registerLazySingleton<Dio>(() {
-    return DioClient().dio;
+    return DioClient(interceptors: [locator<AuthInterceptor>()]).dio;
   });
 
   locator.registerLazySingleton<ApiClient>(() {

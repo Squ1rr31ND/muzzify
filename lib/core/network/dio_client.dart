@@ -5,7 +5,7 @@ import '../constants/network_constants.dart';
 class DioClient {
   final Dio dio;
 
-  DioClient()
+  DioClient({List<Interceptor> interceptors = const []})
     : dio = Dio(
         BaseOptions(
           baseUrl: NetworkConstants.baseUrl,
@@ -13,5 +13,7 @@ class DioClient {
           connectTimeout: NetworkConstants.connectTimeout,
           receiveTimeout: NetworkConstants.receiveTimeout,
         ),
-      );
+      ) {
+    dio.interceptors.addAll(interceptors);
+  }
 }
