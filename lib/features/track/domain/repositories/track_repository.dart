@@ -1,1 +1,1 @@
-abstract class TrackRepository {}
+abstract interface class TrackRepository {}

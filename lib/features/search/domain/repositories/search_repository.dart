@@ -1,1 +1,1 @@
-abstract class SearchRepository {}
+abstract interface class SearchRepository {}

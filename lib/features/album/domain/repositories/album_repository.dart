@@ -1,1 +1,1 @@
-abstract class AlbumRepository {}
+abstract interface class AlbumRepository {}
