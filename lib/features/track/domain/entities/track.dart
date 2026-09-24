@@ -1,4 +1,4 @@
-class Track {
+final class Track {
   final String id;
   final String? title;
   final List<String> artists;
