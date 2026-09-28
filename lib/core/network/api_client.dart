@@ -9,7 +9,7 @@ class ApiClient {
     String path, {
     Object? data,
     Map<String, dynamic>? queryParameters,
-  }) async {
-    return await _dio.get(path, data: data, queryParameters: queryParameters);
+  }) {
+    return _dio.get(path, data: data, queryParameters: queryParameters);
   }
 }
