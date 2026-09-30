@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
 
+import '../../features/album/di/album_di.dart';
 import '../../features/auth/di/auth_di.dart';
 import '../../features/track/di/track_di.dart';
 import '../network/dio_client.dart';
@@ -31,4 +32,6 @@ void setupLocator() {
   registerAuthDependencies();
 
   registerTrackDependencies();
+
+  registerAlbumDependencies();
 }
