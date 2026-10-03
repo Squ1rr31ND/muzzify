@@ -8,6 +8,7 @@ class Application extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      title: 'Muzzify',
       theme: Themes.theme,
       darkTheme: Themes.darkTheme,
       themeMode: Themes.themeMode,
