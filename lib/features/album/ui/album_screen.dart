@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 class AlbumScreen extends StatelessWidget {
-  const AlbumScreen({super.key});
+  const AlbumScreen({super.key, required this.albumId});
+
+  final String albumId;
 
   @override
   Widget build(BuildContext context) {
