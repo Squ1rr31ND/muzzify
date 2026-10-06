@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/extensions/duration_extensions.dart';
 import '../../../../core/extensions/string_list_extensions.dart';
 
 class AudioTile extends StatelessWidget {
@@ -10,16 +9,16 @@ class AudioTile extends StatelessWidget {
   const AudioTile({
     super.key,
     required this.title,
-    required this.duration,
     this.artistNames = const [],
     this.coverImageUrl,
+    this.trailing,
     this.onTap,
   });
 
   final String title;
-  final Duration duration;
   final List<String> artistNames;
   final String? coverImageUrl;
+  final Widget? trailing;
   final VoidCallback? onTap;
 
   @override
@@ -41,7 +40,7 @@ class AudioTile extends StatelessWidget {
               overflow: _overflow,
             )
           : null,
-      trailing: Text(duration.formatted),
+      trailing: trailing,
       onTap: onTap,
     );
   }
