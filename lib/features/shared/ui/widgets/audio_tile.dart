@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import '../../../../core/extensions/string_list_extensions.dart';
 
 class AudioTile extends StatelessWidget {
+  static const double _imageSize = 48.0;
+
   static const int _maxLines = 1;
   static const TextOverflow _overflow = TextOverflow.ellipsis;
 
@@ -27,8 +29,8 @@ class AudioTile extends StatelessWidget {
       leading: coverImageUrl != null
           ? Image.network(
               coverImageUrl!,
-              width: 48,
-              height: 48,
+              width: _imageSize,
+              height: _imageSize,
               fit: BoxFit.cover,
             )
           : null,
