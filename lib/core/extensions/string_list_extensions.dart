@@ -1,3 +1,3 @@
 extension StringListExtensions on List<String> {
-  String toCommaSeparatedString() => join(', ');
+  String get commaSeparated => join(', ');
 }
