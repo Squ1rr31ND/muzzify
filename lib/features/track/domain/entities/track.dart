@@ -1,7 +1,7 @@
 final class Track {
   final String id;
   final String? title;
-  final List<String> artists;
+  final List<String> artistNames;
   final Duration duration;
   final String? coverImageUrl;
 
@@ -9,7 +9,7 @@ final class Track {
     required this.id,
     required this.duration,
     this.title,
-    this.artists = const [],
+    this.artistNames = const [],
     this.coverImageUrl,
   });
 }
