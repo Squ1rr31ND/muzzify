@@ -3,14 +3,14 @@ import '../../../track/domain/entities/track.dart';
 final class Album {
   final String id;
   final String? title;
-  final List<String> artists;
+  final List<String> artistNames;
   final String? coverImageUrl;
   final List<Track> tracks;
 
   const Album({
     required this.id,
     this.title,
-    this.artists = const [],
+    this.artistNames = const [],
     this.coverImageUrl,
     this.tracks = const [],
   });
