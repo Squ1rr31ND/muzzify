@@ -18,11 +18,11 @@ void setupLocator() {
   });
 
   locator.registerLazySingleton<TokenStorage>(() {
-    return SecureTokenStorage(secureStorage: locator());
+    return SecureTokenStorage(secureStorage: locator<FlutterSecureStorage>());
   });
 
   locator.registerLazySingleton<AuthInterceptor>(() {
-    return AuthInterceptor(tokenStorage: locator());
+    return AuthInterceptor(tokenStorage: locator<TokenStorage>());
   });
 
   locator.registerLazySingleton<Dio>(() {
