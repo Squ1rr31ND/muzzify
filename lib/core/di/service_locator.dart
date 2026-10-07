@@ -13,25 +13,33 @@ import '../storage/token_storage.dart';
 final locator = GetIt.instance;
 
 void setupLocator() {
-  locator.registerLazySingleton<FlutterSecureStorage>(() {
-    return const FlutterSecureStorage();
-  });
+  _registerStorageDependencies();
+  _registerNetworkDependencies();
+  _registerFeatureDependencies();
+}
 
-  locator.registerLazySingleton<TokenStorage>(() {
-    return SecureTokenStorage(secureStorage: locator<FlutterSecureStorage>());
-  });
+void _registerStorageDependencies() {
+  locator.registerLazySingleton<FlutterSecureStorage>(
+    () => const FlutterSecureStorage(),
+  );
 
-  locator.registerLazySingleton<AuthInterceptor>(() {
-    return AuthInterceptor(tokenStorage: locator<TokenStorage>());
-  });
+  locator.registerLazySingleton<TokenStorage>(
+    () => SecureTokenStorage(secureStorage: locator<FlutterSecureStorage>()),
+  );
+}
 
-  locator.registerLazySingleton<Dio>(() {
-    return DioClient(interceptors: [locator<AuthInterceptor>()]).dio;
-  });
+void _registerNetworkDependencies() {
+  locator.registerLazySingleton<AuthInterceptor>(
+    () => AuthInterceptor(tokenStorage: locator<TokenStorage>()),
+  );
 
+  locator.registerLazySingleton<Dio>(
+    () => DioClient(interceptors: [locator<AuthInterceptor>()]).dio,
+  );
+}
+
+void _registerFeatureDependencies() {
   registerAuthDependencies();
-
   registerTrackDependencies();
-
   registerAlbumDependencies();
 }
