@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 
-import '../../../core/di/service_locator.dart';
+import '../../../core/di/locator.dart';
 import '../data/api/track_api.dart';
 
 void registerTrackDependencies() {
