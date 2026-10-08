@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 
 import '../../storage/token_storage.dart';
@@ -13,7 +15,7 @@ class AuthInterceptor extends Interceptor {
         .getAccessToken()
         .then((token) {
           if (token != null && token.isNotEmpty) {
-            options.headers['Authorization'] = 'OAuth $token';
+            options.headers[HttpHeaders.authorizationHeader] = 'OAuth $token';
           }
         })
         .whenComplete(() {
