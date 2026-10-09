@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../core/extensions/string_list_extensions.dart';
+import '../../extensions/string_list_extensions.dart';
 
 class AudioTile extends StatelessWidget {
   static const double _imageSize = 48.0;
