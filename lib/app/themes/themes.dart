@@ -1,9 +1,18 @@
 import 'package:flutter/material.dart';
 
 class Themes {
-  static final ThemeData theme = ThemeData();
+  static const Color _seedColor = Colors.yellow;
 
-  static final ThemeData darkTheme = ThemeData.dark();
+  static final ThemeData theme = ThemeData(
+    colorScheme: ColorScheme.fromSeed(seedColor: _seedColor),
+  );
+
+  static final ThemeData darkTheme = ThemeData(
+    colorScheme: ColorScheme.fromSeed(
+      seedColor: _seedColor,
+      brightness: Brightness.dark,
+    ),
+  );
 
   static const ThemeMode themeMode = ThemeMode.system;
 }
