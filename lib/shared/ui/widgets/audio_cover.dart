@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../extensions/theme_extensions.dart';
+
 class AudioCover extends StatelessWidget {
   const AudioCover({super.key, this.imageUrl, this.size = 48});
 
@@ -16,7 +18,7 @@ class AudioCover extends StatelessWidget {
         children: [
           Container(
             alignment: Alignment.center,
-            color: Theme.of(context).colorScheme.surfaceContainer,
+            color: context.colorScheme.surfaceContainer,
             child: const Icon(Icons.music_note),
           ),
           if (imageUrl != null)
