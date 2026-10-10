@@ -10,17 +10,13 @@ class SecureTokenStorage implements TokenStorage {
   const SecureTokenStorage({required this._secureStorage});
 
   @override
-  Future<String?> getAccessToken() {
-    return _secureStorage.read(key: _accessTokenKey);
-  }
+  Future<String?> getAccessToken() => _secureStorage.read(key: _accessTokenKey);
 
   @override
-  Future<void> saveAccessToken(String token) async {
-    await _secureStorage.write(key: _accessTokenKey, value: token);
-  }
+  Future<void> saveAccessToken(String token) =>
+      _secureStorage.write(key: _accessTokenKey, value: token);
 
   @override
-  Future<void> deleteAccessToken() async {
-    await _secureStorage.delete(key: _accessTokenKey);
-  }
+  Future<void> deleteAccessToken() =>
+      _secureStorage.delete(key: _accessTokenKey);
 }
