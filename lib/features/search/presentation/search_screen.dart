@@ -108,41 +108,14 @@ class _SearchScreenState extends State<SearchScreen> {
             case SearchLoaded(:final tracks):
               return ListView.builder(
                 controller: _scrollController,
+                itemCount: tracks.length + (state.hasReachedMax ? 0 : 1),
                 itemBuilder: (context, index) {
-                  if (index == tracks.length) {
-                    if (state.isLoadingMore) {
-                      return const Padding(
-                        padding: EdgeInsets.all(26.0),
-                        child: Center(child: CircularProgressIndicator()),
-                      );
-                    }
-
-                    if (state.hasError) {
-                      return Padding(
-                        padding: const EdgeInsets.all(12.0),
-                        child: Card.outlined(
-                          child: ListTile(
-                            leading: const Icon(Icons.info_outline),
-                            title: const Text('Something went wrong'),
-                            trailing: FilledButton.icon(
-                              onPressed: () {
-                                context.read<SearchCubit>().loadMore();
-                              },
-                              icon: const Icon(Icons.refresh),
-                              label: const Text('Retry'),
-                            ),
-                          ),
-                        ),
-                      );
-                    }
-
-                    return const SizedBox.shrink();
-                  }
+                  final isFooterIndex = index == tracks.length;
+                  if (isFooterIndex) return _PaginationFooter(state: state);
 
                   final track = tracks[index];
                   return TrackTile(track: track);
                 },
-                itemCount: tracks.length + (state.hasReachedMax ? 0 : 1),
               );
             case SearchEmpty():
               return const Center(child: Text('Nothing found'));
@@ -152,5 +125,40 @@ class _SearchScreenState extends State<SearchScreen> {
         },
       ),
     );
+  }
+}
+
+class _PaginationFooter extends StatelessWidget {
+  const _PaginationFooter({required this.state});
+
+  final SearchLoaded state;
+
+  @override
+  Widget build(BuildContext context) {
+    if (state.isLoadingMore) {
+      return const Padding(
+        padding: EdgeInsets.all(26.0),
+        child: Center(child: CircularProgressIndicator()),
+      );
+    }
+
+    if (state.hasError) {
+      return Padding(
+        padding: const EdgeInsets.all(12.0),
+        child: Card.outlined(
+          child: ListTile(
+            leading: const Icon(Icons.info_outline),
+            title: const Text('Something went wrong'),
+            trailing: FilledButton.icon(
+              onPressed: () => context.read<SearchCubit>().loadMore(),
+              icon: const Icon(Icons.refresh),
+              label: const Text('Retry'),
+            ),
+          ),
+        ),
+      );
+    }
+
+    return const SizedBox.shrink();
   }
 }
