@@ -16,15 +16,26 @@ class SearchScreen extends StatefulWidget {
 class _SearchScreenState extends State<SearchScreen> {
   static const double _searchBarHeight = 56.0;
   static const double _searchBarPadding = 12.0;
+  static const double _scrollThreshold = 200.0;
 
   final _searchController = TextEditingController();
   final _focusNode = FocusNode();
   final _scrollController = ScrollController();
 
+  bool get _isNearEnd {
+    if (!_scrollController.hasClients) return false;
+
+    final position = _scrollController.position;
+
+    if (position.maxScrollExtent == 0) return false;
+
+    return position.pixels >= position.maxScrollExtent - _scrollThreshold;
+  }
+
   @override
   void initState() {
     super.initState();
-    _scrollController.addListener(_focusNode.unfocus);
+    _scrollController.addListener(_onScroll);
   }
 
   @override
@@ -45,6 +56,11 @@ class _SearchScreenState extends State<SearchScreen> {
   void _onCleared() {
     _searchController.clear();
     _focusNode.requestFocus();
+  }
+
+  void _onScroll() {
+    if (_focusNode.hasFocus) _focusNode.unfocus();
+    if (_isNearEnd) context.read<SearchCubit>().loadMore();
   }
 
   @override
@@ -84,10 +100,44 @@ class _SearchScreenState extends State<SearchScreen> {
               return ListView.builder(
                 controller: _scrollController,
                 itemBuilder: (context, index) {
+                  if (index == tracks.length) {
+                    if (!state.hasReachedMax) {
+                      if (state.isLoadingMore) {
+                        return const Padding(
+                          padding: EdgeInsets.all(26.0),
+                          child: Center(child: CircularProgressIndicator()),
+                        );
+                      }
+
+                      if (state.hasError) {
+                        return Padding(
+                          padding: const EdgeInsets.all(12.0),
+                          child: Card.outlined(
+                            child: ListTile(
+                              leading: const Icon(Icons.info_outline),
+                              title: const Text('Something went wrong'),
+                              trailing: FilledButton.icon(
+                                onPressed: () {
+                                  context.read<SearchCubit>().loadMore();
+                                },
+                                icon: const Icon(Icons.refresh),
+                                label: const Text('Retry'),
+                              ),
+                            ),
+                          ),
+                        );
+                      }
+
+                      return const SizedBox.shrink();
+                    }
+
+                    return const SizedBox.shrink();
+                  }
+
                   final track = tracks[index];
                   return TrackTile(track: track);
                 },
-                itemCount: tracks.length,
+                itemCount: tracks.length + (state.hasReachedMax ? 0 : 1),
               );
             case SearchEmpty():
               return const Center(child: Text('Nothing found'));
