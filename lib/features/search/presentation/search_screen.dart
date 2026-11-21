@@ -21,10 +21,17 @@ class _SearchScreenState extends State<SearchScreen> {
   final _focusNode = FocusNode();
   final _scrollController = ScrollController();
 
+  bool get _isAtEnd {
+    if (!_scrollController.hasClients) return false;
+    final position = _scrollController.position;
+    if (position.maxScrollExtent == 0) return false;
+    return position.pixels == position.maxScrollExtent;
+  }
+
   @override
   void initState() {
     super.initState();
-    _scrollController.addListener(_focusNode.unfocus);
+    _scrollController.addListener(_onScroll);
   }
 
   @override
@@ -36,15 +43,33 @@ class _SearchScreenState extends State<SearchScreen> {
   }
 
   void _onSubmitted(String query) {
-    if (query.trim().isEmpty) return;
+    final trimmedQuery = query.trim();
+    _searchController.text = trimmedQuery;
+
+    if (trimmedQuery.isEmpty) {
+      final state = context.read<SearchCubit>().state;
+
+      if (state is! SearchLoaded) {
+        _searchController.clear();
+        return;
+      }
+
+      _searchController.text = state.query;
+      return;
+    }
 
     if (_scrollController.hasClients) _scrollController.jumpTo(0);
-    context.read<SearchCubit>().search(query);
+    context.read<SearchCubit>().search(trimmedQuery);
   }
 
   void _onCleared() {
     _searchController.clear();
     _focusNode.requestFocus();
+  }
+
+  void _onScroll() {
+    if (_focusNode.hasFocus) _focusNode.unfocus();
+    if (_isAtEnd) context.read<SearchCubit>().loadMore();
   }
 
   @override
@@ -84,10 +109,40 @@ class _SearchScreenState extends State<SearchScreen> {
               return ListView.builder(
                 controller: _scrollController,
                 itemBuilder: (context, index) {
+                  if (index == tracks.length) {
+                    if (state.isLoadingMore) {
+                      return const Padding(
+                        padding: EdgeInsets.all(26.0),
+                        child: Center(child: CircularProgressIndicator()),
+                      );
+                    }
+
+                    if (state.hasError) {
+                      return Padding(
+                        padding: const EdgeInsets.all(12.0),
+                        child: Card.outlined(
+                          child: ListTile(
+                            leading: const Icon(Icons.info_outline),
+                            title: const Text('Something went wrong'),
+                            trailing: FilledButton.icon(
+                              onPressed: () {
+                                context.read<SearchCubit>().loadMore();
+                              },
+                              icon: const Icon(Icons.refresh),
+                              label: const Text('Retry'),
+                            ),
+                          ),
+                        ),
+                      );
+                    }
+
+                    return const SizedBox.shrink();
+                  }
+
                   final track = tracks[index];
                   return TrackTile(track: track);
                 },
-                itemCount: tracks.length,
+                itemCount: tracks.length + (state.hasReachedMax ? 0 : 1),
               );
             case SearchEmpty():
               return const Center(child: Text('Nothing found'));
