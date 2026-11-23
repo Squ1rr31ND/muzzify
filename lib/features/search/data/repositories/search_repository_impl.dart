@@ -1,4 +1,4 @@
-import '../../../../shared/domain/entities/track.dart';
+import '../../../track/domain/entities/track.dart';
 import '../../domain/repositories/search_repository.dart';
 import '../api/search_api.dart';
 

@@ -1,5 +1,5 @@
+import '../../../../shared/data/models/artist_model.dart';
 import '../../domain/entities/track.dart';
-import 'artist_model.dart';
 
 final class TrackModel {
   static const String _coverSize = '150x150';

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../shared/presentation/widgets/track_tile.dart';
+import '../../track/presentation/widgets/track_tile.dart';
 import 'bloc/search_cubit.dart';
 import 'bloc/search_state.dart';
 import 'widgets/search_field.dart';

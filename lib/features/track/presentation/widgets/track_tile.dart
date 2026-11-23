@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../../core/extensions/build_context_extensions.dart';
-import '../../../core/extensions/duration_extensions.dart';
+import '../../../../core/extensions/build_context_extensions.dart';
+import '../../../../core/extensions/duration_extensions.dart';
 import '../../domain/entities/track.dart';
 
 class TrackTile extends StatelessWidget {

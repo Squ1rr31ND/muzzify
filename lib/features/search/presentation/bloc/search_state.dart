@@ -1,4 +1,4 @@
-import '../../../../shared/domain/entities/track.dart';
+import '../../../track/domain/entities/track.dart';
 
 sealed class SearchState {
   const SearchState();

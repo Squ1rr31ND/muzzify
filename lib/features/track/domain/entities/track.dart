@@ -1,4 +1,4 @@
-import 'artist.dart';
+import '../../../../shared/domain/entities/artist.dart';
 
 final class Track {
   final int id;

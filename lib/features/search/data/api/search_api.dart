@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 
-import '../../../../shared/data/models/track_model.dart';
+import '../../../track/data/models/track_model.dart';
 
 final class SearchApi {
   static const int pageSize = 36;
