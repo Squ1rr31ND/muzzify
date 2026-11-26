@@ -1,6 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../data/api/search_api.dart';
 import '../../domain/repositories/search_repository.dart';
 import 'search_state.dart';
 
@@ -18,14 +17,21 @@ final class SearchCubit extends Cubit<SearchState> {
     emit(const SearchLoading());
 
     try {
-      final tracks = await _repository.search(query, page: 0);
+      final result = await _repository.search(query, page: 0);
+      final tracks = result.tracks;
 
       if (tracks.isEmpty) {
         emit(const SearchEmpty());
         return;
       }
 
-      emit(SearchLoaded(query: query, tracks: tracks));
+      emit(
+        SearchLoaded(
+          query: query,
+          tracks: tracks,
+          hasReachedMax: result.isLastResult,
+        ),
+      );
     } catch (_) {
       emit(SearchFailure(query: query));
     }
@@ -41,19 +47,17 @@ final class SearchCubit extends Cubit<SearchState> {
     emit(state.copyWith(isLoadingMore: true, hasError: false));
 
     try {
-      final nextPageTracks = await _repository.search(
+      final nextPageResult = await _repository.search(
         state.query,
         page: state.currentPage + 1,
       );
 
-      final hasReachedMax = nextPageTracks.length < SearchApi.pageSize;
-
       emit(
         state.copyWith(
-          tracks: [...state.tracks, ...nextPageTracks],
+          tracks: [...state.tracks, ...nextPageResult.tracks],
           currentPage: state.currentPage + 1,
           isLoadingMore: false,
-          hasReachedMax: hasReachedMax,
+          hasReachedMax: nextPageResult.isLastResult,
           hasError: false,
         ),
       );

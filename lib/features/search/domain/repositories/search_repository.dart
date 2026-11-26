@@ -1,5 +1,5 @@
-import '../../../track/domain/entities/track.dart';
+import '../entities/search_result.dart';
 
 abstract interface class SearchRepository {
-  Future<List<Track>> search(String query, {int page = 0});
+  Future<SearchResult> search(String query, {int page = 0});
 }

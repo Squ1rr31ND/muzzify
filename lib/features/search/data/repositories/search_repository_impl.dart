@@ -1,4 +1,4 @@
-import '../../../track/domain/entities/track.dart';
+import '../../domain/entities/search_result.dart';
 import '../../domain/repositories/search_repository.dart';
 import '../api/search_api.dart';
 
@@ -8,8 +8,10 @@ final class SearchRepositoryImpl implements SearchRepository {
   const SearchRepositoryImpl({required this._api});
 
   @override
-  Future<List<Track>> search(String query, {int page = 0}) async {
+  Future<SearchResult> search(String query, {int page = 0}) async {
     final trackModels = await _api.search(query, page: page);
-    return trackModels.map((model) => model.toEntity()).toList();
+    final tracks = trackModels.map((model) => model.toEntity()).toList();
+    final isLastResult = tracks.length < SearchApi.pageSize;
+    return SearchResult(tracks: tracks, isLastResult: isLastResult);
   }
 }
