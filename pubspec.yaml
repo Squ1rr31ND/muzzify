@@ -19,6 +19,9 @@ dependencies:
   xml: ^7.1.0
 
   material_ui: any
+  flutter_localizations:
+    sdk: flutter
+  intl: any
 dev_dependencies:
   flutter_test:
     sdk: flutter
