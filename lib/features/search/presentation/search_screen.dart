@@ -5,6 +5,7 @@ import 'package:url_launcher/url_launcher_string.dart';
 
 import '../../../core/di/service_locator.dart';
 import '../../../shared/extensions/build_context_extensions.dart';
+import '../../../shared/presentation/widgets/error_view.dart';
 import '../../auth/presentation/bloc/auth_cubit.dart';
 import '../../track/domain/repositories/track_repository.dart';
 import '../../track/presentation/widgets/track_tile.dart';
@@ -163,9 +164,14 @@ class _SearchScreenState extends State<SearchScreen> {
                 separatorBuilder: (_, _) => const Divider(height: 8.0),
               );
             case SearchEmpty():
-              return const Center(child: Text('Nothing found'));
-            case SearchFailure():
-              return const Center(child: Text('Something went wrong'));
+              return const Center(child: ErrorView(message: 'Nothing found'));
+            case SearchFailure(:final query):
+              return Center(
+                child: ErrorView(
+                  message: 'Something went wrong',
+                  onRetry: () => _onSubmitted(query),
+                ),
+              );
           }
         },
       ),
