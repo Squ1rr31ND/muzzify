@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 class SearchField extends StatelessWidget {
   static const double _borderRadius = 28.0;
