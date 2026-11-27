@@ -1,22 +1,23 @@
 import 'package:material_ui/material_ui.dart';
 
+import '../colors/app_colors.dart';
+
 class AppTheme {
-  static const MaterialColor _seedColor = Colors.yellow;
   static const AppBarTheme _appBarTheme = AppBarTheme(
-    shadowColor: Colors.black,
+    shadowColor: AppColors.appBarShadow,
     centerTitle: true,
   );
 
   static final ThemeData theme = ThemeData(
-    colorSchemeSeed: _seedColor,
+    colorSchemeSeed: AppColors.appSeed,
     appBarTheme: _appBarTheme,
   );
 
   static final ThemeData darkTheme = ThemeData(
     colorScheme: ColorScheme.fromSeed(
-      seedColor: _seedColor,
+      seedColor: AppColors.appSeed,
       brightness: Brightness.dark,
-      surface: Colors.black,
+      surface: AppColors.darkSurface,
     ),
     appBarTheme: _appBarTheme,
   );
