@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
+import '../../../core/di/service_locator.dart';
+import '../../../shared/extensions/build_context_extensions.dart';
 import '../../auth/presentation/bloc/auth_cubit.dart';
+import '../../track/domain/repositories/track_repository.dart';
 import '../../track/presentation/widgets/track_tile.dart';
 import 'bloc/search_cubit.dart';
 import 'bloc/search_state.dart';
@@ -74,6 +78,15 @@ class _SearchScreenState extends State<SearchScreen> {
     if (_isAtEnd) context.read<SearchCubit>().loadMore();
   }
 
+  Future<void> _onTrackSelected(int trackId) async {
+    try {
+      final trackUrl = await locator<TrackRepository>().getDownloadUrl(trackId);
+      await launchUrlString(trackUrl, mode: LaunchMode.externalApplication);
+    } catch (_) {
+      if (mounted) context.showSnackBar('Failed to open track');
+    }
+  }
+
   void _onLogOut() {
     Navigator.pop(context);
     showDialog(
@@ -142,7 +155,10 @@ class _SearchScreenState extends State<SearchScreen> {
                   if (isFooterIndex) return _PaginationFooter(state: state);
 
                   final track = tracks[index];
-                  return TrackTile(track: track, onTap: () {});
+                  return TrackTile(
+                    track: track,
+                    onTap: () => _onTrackSelected(track.id),
+                  );
                 },
                 separatorBuilder: (_, _) => const Divider(height: 8.0),
               );
