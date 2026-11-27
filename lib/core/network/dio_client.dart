@@ -3,7 +3,7 @@ import 'package:dio/dio.dart';
 final class DioClient {
   final Dio dio;
 
-  DioClient()
+  DioClient({List<Interceptor> interceptors = const []})
     : dio = Dio(
         BaseOptions(
           baseUrl: 'https://api.music.yandex.net',
@@ -11,5 +11,5 @@ final class DioClient {
           connectTimeout: const Duration(seconds: 10),
           receiveTimeout: const Duration(seconds: 15),
         ),
-      );
+      )..interceptors.addAll(interceptors);
 }
