@@ -124,6 +124,21 @@ class _SearchScreenState extends State<SearchScreen> {
           }
         },
       ),
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: [
+            const DrawerHeader(
+              child: Center(
+                child: Text(
+                  'Muzzify',
+                  style: TextStyle(fontSize: 48.0, fontWeight: FontWeight.bold),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
