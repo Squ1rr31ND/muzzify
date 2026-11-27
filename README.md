@@ -2,6 +2,8 @@
 
 A Flutter app for searching tracks in Yandex Music.
 
+🔗 [Читать на русском / Read in Russian](README_RU.md)
+
 ## ✨ About
 
 Muzzify is a Flutter application that lets you search for tracks in Yandex Music. It uses OAuth 2.0 for authentication, supports real-time search with pagination, and is built with a clean, layered architecture.
