@@ -1,7 +1,7 @@
+import '../../../../core/storages/token_storage.dart';
 import '../../domain/repositories/auth_repository.dart';
 import '../parsers/callback_url_parser.dart';
 import '../storages/cookie_storage.dart';
-import '../storages/token_storage.dart';
 
 final class AuthRepositoryImpl implements AuthRepository {
   final CookieStorage _cookieStorage;

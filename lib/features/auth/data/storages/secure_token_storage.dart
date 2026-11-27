@@ -1,7 +1,7 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
+import '../../../../core/storages/token_storage.dart';
 import '../../constants/auth_constants.dart';
-import 'token_storage.dart';
 
 final class SecureTokenStorage implements TokenStorage {
   final FlutterSecureStorage _secureStorage;

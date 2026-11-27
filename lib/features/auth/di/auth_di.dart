@@ -2,11 +2,11 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 import '../../../core/di/service_locator.dart';
+import '../../../core/storages/token_storage.dart';
 import '../data/repositories/auth_repository_impl.dart';
 import '../data/storages/cookie_storage.dart';
 import '../data/storages/cookie_storage_impl.dart';
 import '../data/storages/secure_token_storage.dart';
-import '../data/storages/token_storage.dart';
 import '../domain/repositories/auth_repository.dart';
 import '../presentation/bloc/auth_cubit.dart';
 
