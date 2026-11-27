@@ -5,6 +5,7 @@ import 'package:url_launcher/url_launcher_string.dart';
 
 import '../../../core/di/service_locator.dart';
 import '../../../shared/extensions/build_context_extensions.dart';
+import '../../../shared/presentation/widgets/app_drawer.dart';
 import '../../../shared/presentation/widgets/error_view.dart';
 import '../../auth/presentation/bloc/auth_cubit.dart';
 import '../../track/domain/repositories/track_repository.dart';
@@ -175,25 +176,14 @@ class _SearchScreenState extends State<SearchScreen> {
           }
         },
       ),
-      drawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: [
-            const DrawerHeader(
-              child: Center(
-                child: Text(
-                  'Muzzify',
-                  style: TextStyle(fontSize: 48.0, fontWeight: FontWeight.bold),
-                ),
-              ),
-            ),
-            ListTile(
-              leading: const Icon(Icons.logout),
-              title: const Text('Log out'),
-              onTap: _onLogOut,
-            ),
-          ],
-        ),
+      drawer: AppDrawer(
+        children: [
+          ListTile(
+            leading: const Icon(Icons.logout),
+            title: const Text('Log out'),
+            onTap: _onLogOut,
+          ),
+        ],
       ),
     );
   }
