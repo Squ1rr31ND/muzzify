@@ -3,6 +3,7 @@ import 'package:package_info_plus/package_info_plus.dart';
 
 import '../../../core/constants/app_constants.dart';
 import '../../extensions/build_context_extensions.dart';
+import 'app_icon.dart';
 
 class AppDrawer extends StatelessWidget {
   const AppDrawer({super.key, this.children = const []});
@@ -31,6 +32,7 @@ class AppDrawer extends StatelessWidget {
                 return AboutListTile(
                   icon: const Icon(Icons.info_outlined),
                   applicationVersion: snapshot.data?.version ?? '',
+                  applicationIcon: const AppIcon(size: 96.0),
                   applicationLegalese: context.l10n.aboutCopyrightText,
                 );
               },
