@@ -21,7 +21,10 @@ class AppDrawer extends StatelessWidget {
               ),
             ),
           ),
-          ...children,
+          ...[
+            if (children.isNotEmpty) ...[...children, Divider()],
+            const AboutListTile(icon: Icon(Icons.info_outlined)),
+          ],
         ],
       ),
     );
