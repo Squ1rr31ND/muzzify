@@ -86,7 +86,7 @@ class _SearchScreenState extends State<SearchScreen> {
       final trackUrl = await locator<TrackRepository>().getDownloadUrl(trackId);
       await launchUrlString(trackUrl, mode: LaunchMode.externalApplication);
     } catch (_) {
-      if (mounted) context.showSnackBar('Failed to open track');
+      if (mounted) context.showSnackBar(context.l10n.trackOpenFailed);
     }
   }
 
@@ -97,18 +97,18 @@ class _SearchScreenState extends State<SearchScreen> {
       barrierDismissible: false,
       builder: (dialogContext) {
         return AlertDialog(
-          title: const Text('Are you sure?'),
+          title: Text(context.l10n.logoutConfirmation),
           actions: [
             TextButton(
               onPressed: dialogContext.pop,
-              child: const Text('Cancel'),
+              child: Text(context.l10n.logoutCancel),
             ),
             FilledButton(
               onPressed: () {
                 dialogContext.pop();
                 context.read<AuthCubit>().logout();
               },
-              child: const Text('Log out'),
+              child: Text(context.l10n.logoutConfirm),
             ),
           ],
         );
@@ -134,7 +134,7 @@ class _SearchScreenState extends State<SearchScreen> {
               focusNode: _focusNode,
               onSubmitted: _onSubmitted,
               onCleared: _onCleared,
-              hintText: 'Search tracks',
+              hintText: context.l10n.searchHint,
               filled: true,
             ),
           ),
@@ -166,11 +166,13 @@ class _SearchScreenState extends State<SearchScreen> {
                 separatorBuilder: (_, _) => const Divider(height: 8.0),
               );
             case SearchEmpty():
-              return const Center(child: ErrorView(message: 'Nothing found'));
+              return Center(
+                child: ErrorView(message: context.l10n.nothingFound),
+              );
             case SearchFailure(:final query):
               return Center(
                 child: ErrorView(
-                  message: 'Something went wrong',
+                  message: context.l10n.errorTitle,
                   onRetry: () => _onSubmitted(query),
                 ),
               );
@@ -181,7 +183,7 @@ class _SearchScreenState extends State<SearchScreen> {
         children: [
           ListTile(
             leading: const Icon(Icons.logout),
-            title: const Text('Log out'),
+            title: Text(context.l10n.logoutTitle),
             onTap: _onLogOut,
           ),
         ],
@@ -210,11 +212,11 @@ class _PaginationFooter extends StatelessWidget {
         child: Card.outlined(
           child: ListTile(
             leading: const Icon(Icons.info_outline),
-            title: const Text('Something went wrong'),
+            title: Text(context.l10n.errorTitle),
             trailing: FilledButton.icon(
               onPressed: () => context.read<SearchCubit>().loadMore(),
               icon: const Icon(Icons.refresh),
-              label: const Text('Retry'),
+              label: Text(context.l10n.errorRetry),
             ),
           ),
         ),

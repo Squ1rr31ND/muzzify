@@ -1,5 +1,7 @@
 import 'package:material_ui/material_ui.dart';
 
+import '../../extensions/build_context_extensions.dart';
+
 class ErrorView extends StatelessWidget {
   const ErrorView({super.key, required this.message, this.onRetry});
 
@@ -23,7 +25,10 @@ class ErrorView extends StatelessWidget {
           ),
           if (onRetry != null) ...[
             SizedBox(height: 12.0),
-            FilledButton(onPressed: onRetry, child: Text('Try again')),
+            FilledButton(
+              onPressed: onRetry,
+              child: Text(context.l10n.errorRetry),
+            ),
           ],
         ],
       ),

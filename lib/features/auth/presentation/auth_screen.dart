@@ -4,6 +4,7 @@ import 'package:material_ui/material_ui.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 import '../../../core/di/service_locator.dart';
+import '../../../shared/extensions/build_context_extensions.dart';
 import '../../../shared/presentation/widgets/app_drawer.dart';
 import '../../../shared/presentation/widgets/error_view.dart';
 import '../constants/auth_constants.dart';
@@ -86,11 +87,11 @@ class _AuthScreenState extends State<AuthScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Yandex ID')),
+      appBar: AppBar(title: Text(context.l10n.yandexIdTitle)),
       body: _hasError
           ? Center(
               child: ErrorView(
-                message: 'Something went wrong',
+                message: context.l10n.errorTitle,
                 onRetry: _resetError,
               ),
             )
