@@ -1,0 +1,51 @@
+{
+    "@@locale": "en",
+    "yandexIdTitle": "Yandex ID",
+    "@yandexIdTitle": {
+        "description": "Title of the AppBar on the auth screen (Yandex ID login page)."
+    },
+    "searchHint": "Search tracks",
+    "@searchHint": {
+        "description": "Hint text inside the search field on the search screen."
+    },
+    "trackOpenFailed": "Failed to open track",
+    "@trackOpenFailed": {
+        "description": "Error shown when track cannot be opened"
+    },
+    "sourceCode": "Source code",
+    "@sourceCode": {
+        "description": "Menu item in AppDrawer that opens the source code repository."
+    },
+    "logoutTitle": "Log out",
+    "@logoutTitle": {
+        "description": "Menu item in AppDrawer that triggers the logout flow."
+    },
+    "logoutConfirmation": "Are you sure?",
+    "@logoutConfirmation": {
+        "description": "Title of the confirmation dialog shown before logging out."
+    },
+    "logoutCancel": "Cancel",
+    "@logoutCancel": {
+        "description": "Button that closes the logout confirmation dialog without action."
+    },
+    "logoutConfirm": "Log out",
+    "@logoutConfirm": {
+        "description": "Button that confirms and performs the logout."
+    },
+    "nothingFound": "Nothing found",
+    "@nothingFound": {
+        "description": "Message shown when search returns no results."
+    },
+    "errorTitle": "Something went wrong",
+    "@errorTitle": {
+        "description": "Main message shown in ErrorView when a request fails."
+    },
+    "errorRetry": "Retry",
+    "@errorRetry": {
+        "description": "Button label in ErrorView that retries the failed operation."
+    },
+    "aboutCopyrightText": "Copyright (c) 2026 Timur Zhdikhanov",
+    "@aboutCopyrightText": {
+        "description": "Copyright notice shown in the About dialog."
+    }
+}
