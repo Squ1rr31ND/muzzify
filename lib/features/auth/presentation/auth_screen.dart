@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 import '../../../core/di/service_locator.dart';
+import '../../../shared/presentation/widgets/app_drawer.dart';
 import '../../../shared/presentation/widgets/error_view.dart';
 import '../constants/auth_constants.dart';
 import 'bloc/auth_cubit.dart';
@@ -99,6 +100,7 @@ class _AuthScreenState extends State<AuthScreen> {
                 if (_isLoading) const LinearProgressIndicator(),
               ],
             ),
+      drawer: AppDrawer(),
     );
   }
 }
