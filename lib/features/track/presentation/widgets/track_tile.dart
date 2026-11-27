@@ -10,6 +10,7 @@ class TrackTile extends StatelessWidget {
   static const double _coverPlaceholderIconSize = 36.0;
   static const TextOverflow _textOverflow = TextOverflow.ellipsis;
   static const int _textMaxLines = 1;
+  static const double _tileHeight = 72.0;
 
   final Track track;
   final VoidCallback? onTap;
@@ -51,13 +52,16 @@ class TrackTile extends StatelessWidget {
         overflow: _textOverflow,
         maxLines: _textMaxLines,
       ),
-      subtitle: Text(
-        track.artists.map((artist) => artist.name).join(', '),
-        overflow: _textOverflow,
-        maxLines: _textMaxLines,
-      ),
+      subtitle: track.artists.isNotEmpty
+          ? Text(
+              track.artists.map((artist) => artist.name).join(', '),
+              overflow: _textOverflow,
+              maxLines: _textMaxLines,
+            )
+          : null,
       trailing: Text(track.duration.toTimeString()),
       onTap: onTap,
+      minTileHeight: _tileHeight,
     );
   }
 }
