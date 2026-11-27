@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
+import '../../../core/constants/app_constants.dart';
 import '../../../core/di/service_locator.dart';
 import '../../../shared/extensions/build_context_extensions.dart';
 import '../../../shared/presentation/widgets/app_drawer.dart';
@@ -119,7 +120,7 @@ class _SearchScreenState extends State<SearchScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Muzzify'),
+        title: Text(AppConstants.appName),
         bottom: PreferredSize(
           preferredSize: Size.fromHeight(_searchBarHeight + _searchBarPadding),
           child: Padding(
