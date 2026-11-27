@@ -16,15 +16,15 @@ class ErrorView extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Icon(Icons.info_outlined, size: 64.0),
-          SizedBox(height: 8.0),
+          const Icon(Icons.info_outlined, size: 64.0),
+          const SizedBox(height: 8.0),
           Text(
             message,
-            style: TextStyle(fontSize: 24.0),
+            style: const TextStyle(fontSize: 24.0),
             textAlign: TextAlign.center,
           ),
           if (onRetry != null) ...[
-            SizedBox(height: 12.0),
+            const SizedBox(height: 12.0),
             FilledButton(
               onPressed: onRetry,
               child: Text(context.l10n.errorRetry),

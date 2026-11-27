@@ -14,7 +14,7 @@ class AppDrawer extends StatelessWidget {
       child: ListView(
         padding: EdgeInsets.zero,
         children: [
-          DrawerHeader(
+          const DrawerHeader(
             child: Center(
               child: Text(
                 AppConstants.appName,
@@ -23,9 +23,9 @@ class AppDrawer extends StatelessWidget {
             ),
           ),
           ...[
-            if (children.isNotEmpty) ...[...children, Divider()],
+            if (children.isNotEmpty) ...[...children, const Divider()],
             AboutListTile(
-              icon: Icon(Icons.info_outlined),
+              icon: const Icon(Icons.info_outlined),
               applicationLegalese: context.l10n.aboutCopyrightText,
             ),
           ],

@@ -48,7 +48,7 @@ class TrackTile extends StatelessWidget {
       ),
       title: Text(
         track.title,
-        style: TextStyle(fontWeight: FontWeight.bold),
+        style: const TextStyle(fontWeight: FontWeight.bold),
         overflow: _textOverflow,
         maxLines: _textMaxLines,
       ),

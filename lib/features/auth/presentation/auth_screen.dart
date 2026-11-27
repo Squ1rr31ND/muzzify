@@ -101,7 +101,7 @@ class _AuthScreenState extends State<AuthScreen> {
                 if (_isLoading) const LinearProgressIndicator(),
               ],
             ),
-      drawer: AppDrawer(),
+      drawer: const AppDrawer(),
     );
   }
 }
