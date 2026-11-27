@@ -1,0 +1,15 @@
+{
+  "@@locale": "ru",
+  "yandexIdTitle": "Яндекс ID",
+  "searchHint": "Поиск треков",
+  "trackOpenFailed": "Не удалось открыть трек",
+  "sourceCode": "Код проекта",
+  "logoutTitle": "Выйти",
+  "logoutConfirmation": "Вы уверены?",
+  "logoutCancel": "Отмена",
+  "logoutConfirm": "Выйти",
+  "nothingFound": "Ничего не найдено",
+  "errorTitle": "Что-то пошло не так",
+  "errorRetry": "Повторить",
+  "aboutCopyrightText": "Copyright (c) 2026 Тимур Ждиханов"
+}
