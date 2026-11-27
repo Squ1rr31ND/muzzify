@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
+import '../../auth/presentation/bloc/auth_cubit.dart';
 import '../../track/presentation/widgets/track_tile.dart';
 import 'bloc/search_cubit.dart';
 import 'bloc/search_state.dart';
@@ -72,6 +74,32 @@ class _SearchScreenState extends State<SearchScreen> {
     if (_isAtEnd) context.read<SearchCubit>().loadMore();
   }
 
+  void _onLogOut() {
+    Navigator.pop(context);
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (dialogContext) {
+        return AlertDialog(
+          title: const Text('Are you sure?'),
+          actions: [
+            TextButton(
+              onPressed: dialogContext.pop,
+              child: const Text('Cancel'),
+            ),
+            FilledButton(
+              onPressed: () {
+                dialogContext.pop();
+                context.read<AuthCubit>().logout();
+              },
+              child: const Text('Log out'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -135,6 +163,11 @@ class _SearchScreenState extends State<SearchScreen> {
                   style: TextStyle(fontSize: 48.0, fontWeight: FontWeight.bold),
                 ),
               ),
+            ),
+            ListTile(
+              leading: const Icon(Icons.logout),
+              title: const Text('Log out'),
+              onTap: _onLogOut,
             ),
           ],
         ),
