@@ -134,7 +134,7 @@ class _SearchScreenState extends State<SearchScreen> {
             case SearchLoading():
               return const Center(child: CircularProgressIndicator());
             case SearchLoaded(:final tracks):
-              return ListView.builder(
+              return ListView.separated(
                 controller: _scrollController,
                 itemCount: tracks.length + (state.hasReachedMax ? 0 : 1),
                 itemBuilder: (context, index) {
@@ -142,8 +142,9 @@ class _SearchScreenState extends State<SearchScreen> {
                   if (isFooterIndex) return _PaginationFooter(state: state);
 
                   final track = tracks[index];
-                  return TrackTile(track: track);
+                  return TrackTile(track: track, onTap: () {});
                 },
+                separatorBuilder: (_, _) => const Divider(height: 8.0),
               );
             case SearchEmpty():
               return const Center(child: Text('Nothing found'));
