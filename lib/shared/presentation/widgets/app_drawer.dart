@@ -1,5 +1,6 @@
 import 'package:material_ui/material_ui.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 import '../../../core/constants/app_constants.dart';
 import '../../extensions/build_context_extensions.dart';
@@ -26,6 +27,15 @@ class AppDrawer extends StatelessWidget {
           ),
           ...[
             if (children.isNotEmpty) ...[...children, const Divider()],
+            ListTile(
+              leading: const Icon(Icons.code),
+              title: Text(context.l10n.sourceCode),
+              onTap: () => launchUrlString(
+                AppConstants.repositoryUrl,
+                mode: LaunchMode.externalApplication,
+              ),
+            ),
+            const Divider(),
             FutureBuilder(
               future: PackageInfo.fromPlatform(),
               builder: (context, snapshot) {
