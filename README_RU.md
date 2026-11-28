@@ -41,6 +41,10 @@ Muzzify — это Flutter-приложение, которое позволяе
 | Работа с URL | url_launcher |
 | Локализация | flutter_localizations + intl |
 
+## 📸 Скриншоты
+
+<img src="assets/images/screenshots/light/search.jpg" alt="Поиск" width="300"> <img src="assets/images/screenshots/dark/search.jpg" alt="Поиск" width="300">
+
 ## 📄 Лицензия
 
 Проект распространяется по лицензии MIT — подробности в файле LICENSE.

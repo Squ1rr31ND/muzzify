@@ -41,6 +41,10 @@ The project is a portfolio piece demonstrating:
 | URL handling | url_launcher |
 | Localization | flutter_localizations + intl |
 
+## 📸 Screenshots
+
+<img src="assets/images/screenshots/light/search.jpg" alt="Search" width="300"> <img src="assets/images/screenshots/dark/search.jpg" alt="Search" width="300">
+
 ## 📄 License
 
 This project is licensed under the MIT License — see the LICENSE file for details.
